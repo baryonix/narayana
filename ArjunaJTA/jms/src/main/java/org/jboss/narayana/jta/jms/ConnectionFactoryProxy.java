@@ -25,6 +25,7 @@ import com.arjuna.ats.jta.logging.jtaLogger;
 
 import javax.jms.Connection;
 import javax.jms.ConnectionFactory;
+import javax.jms.JMSContext;
 import javax.jms.JMSException;
 import javax.jms.XAConnectionFactory;
 
@@ -83,6 +84,26 @@ public class ConnectionFactoryProxy implements ConnectionFactory {
         }
 
         return connection;
+    }
+
+    @Override
+    public JMSContext createContext() {
+        throw new UnsupportedOperationException();
+    }
+
+    @Override
+    public JMSContext createContext(int i) {
+        throw new UnsupportedOperationException();
+    }
+
+    @Override
+    public JMSContext createContext(String username, String password) {
+        throw new UnsupportedOperationException();
+    }
+
+    @Override
+    public JMSContext createContext(String username, String password, int i) {
+        throw new UnsupportedOperationException();
     }
 
 }

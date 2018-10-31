@@ -72,6 +72,24 @@ public class ConnectionProxy implements Connection {
         return xaConnection.createSession(transacted, acknowledgeMode);
     }
 
+    @Override
+    public Session createSession() throws JMSException {
+        if (transactionHelper.isTransactionAvailable()) {
+            return createAndRegisterSession();
+        }
+
+        return xaConnection.createSession();
+    }
+
+    @Override
+    public Session createSession(int sessionMode) throws JMSException {
+        if (transactionHelper.isTransactionAvailable()) {
+            return createAndRegisterSession();
+        }
+
+        return xaConnection.createSession(sessionMode);
+    }
+
     /**
      * Simply close the proxied connection if there is no active transaction. Or register a
      * {@link ConnectionClosingSynchronization} if active transaction exists.
@@ -170,6 +188,20 @@ public class ConnectionProxy implements Connection {
     public ConnectionConsumer createConnectionConsumer(Destination destination, String messageSelector,
             ServerSessionPool sessionPool, int maxMessages) throws JMSException {
         return xaConnection.createConnectionConsumer(destination, messageSelector, sessionPool, maxMessages);
+    }
+
+    @Override
+    public ConnectionConsumer createSharedDurableConnectionConsumer(Topic topic, String subscription,
+                                                                    String messageSelector,
+            ServerSessionPool sessionPool, int maxMessages) throws JMSException {
+        return xaConnection.createSharedDurableConnectionConsumer(topic, subscription, messageSelector, sessionPool, maxMessages);
+    }
+
+    @Override
+    public ConnectionConsumer createSharedConnectionConsumer(Topic topic, String subscription,
+                                                                    String messageSelector,
+            ServerSessionPool sessionPool, int maxMessages) throws JMSException {
+        return xaConnection.createSharedConnectionConsumer(topic, subscription, messageSelector, sessionPool, maxMessages);
     }
 
     /**

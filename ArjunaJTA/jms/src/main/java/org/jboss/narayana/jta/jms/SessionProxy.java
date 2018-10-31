@@ -213,6 +213,36 @@ public class SessionProxy implements Session {
     }
 
     @Override
+    public MessageConsumer createSharedDurableConsumer(Topic topic, String s) throws JMSException {
+        return xaSession.createSharedDurableConsumer(topic, s);
+    }
+
+    @Override
+    public MessageConsumer createSharedDurableConsumer(Topic topic, String s, String s1) throws JMSException {
+        return xaSession.createSharedDurableConsumer(topic, s, s1);
+    }
+
+    @Override
+    public MessageConsumer createSharedConsumer(Topic topic, String s) throws JMSException {
+        return xaSession.createSharedConsumer(topic, s);
+    }
+
+    @Override
+    public MessageConsumer createSharedConsumer(Topic topic, String s, String s1) throws JMSException {
+        return xaSession.createSharedConsumer(topic, s, s1);
+    }
+
+    @Override
+    public MessageConsumer createDurableConsumer(Topic topic, String s) throws JMSException {
+        return xaSession.createDurableConsumer(topic, s);
+    }
+
+    @Override
+    public MessageConsumer createDurableConsumer(Topic topic, String s, String s1, boolean b) throws JMSException {
+        return xaSession.createDurableConsumer(topic, s, s1, b);
+    }
+
+    @Override
     public QueueBrowser createBrowser(Queue queue) throws JMSException {
         return xaSession.createBrowser(queue);
     }
